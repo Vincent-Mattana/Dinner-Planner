@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "174085605234",
+    "project_id": "dinnerplanner-80ea0",
+    "storage_bucket": "dinnerplanner-80ea0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:174085605234:android:f6485e8afce9508c59ffeb",
+        "android_client_info": {
+          "package_name": "com.example.dinnerplanner"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAS87IEYoLv8kamQXZLRLJ67Nmcz6FjZrA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
