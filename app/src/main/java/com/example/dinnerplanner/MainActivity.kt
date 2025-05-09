@@ -259,9 +259,6 @@ class MainActivity : ComponentActivity() {
                                             modifier = contentModifier
                                         )
                                     } else {
-                                        BackHandler(enabled = selectedMeal != null) {
-                                            selectedMeal = null
-                                        }
                                         MealDetailScreen(
                                             meal = selectedMeal!!,
                                             modifier = contentModifier
@@ -272,6 +269,11 @@ class MainActivity : ComponentActivity() {
                             }
                         }
                     }
+                }
+
+                // Global BackHandler to handle system back gestures when a meal is selected
+                BackHandler(enabled = selectedMeal != null) {
+                    selectedMeal = null
                 }
 
                 if (showMealDialog) {
