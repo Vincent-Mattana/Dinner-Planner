@@ -1,0 +1,36 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Basic rules that allow read/write access to meals collection
+    // Since you don't have authentication yet, this allows anyone to read/write
+    // but enforces data structure and validation
+    match /meals/{mealId} {
+      // Allow reads
+      allow read: if true;
+      
+      // Allow creates with validation
+      allow create: if validMeal(request.resource.data);
+      
+      // Allow updates with validation and proper field updates
+      allow update: if validMeal(request.resource.data);
+      
+      // Allow deletes
+      allow delete: if true;
+      
+      // Function to validate meal structure
+      function validMeal(meal) {
+        return meal.size() <= 4 && // Limit fields to prevent abuse
+               meal.keys().hasAll(['name', 'ingredients', 'recipe']) && // Required fields
+               meal.name is string && meal.name.size() > 0 && meal.name.size() <= 100 && // Name validation
+               meal.ingredients is list && // Ingredients must be a list
+               meal.recipe is string && meal.recipe.size() <= 5000 && // Recipe validation
+               (meal.keys().hasAny(['checked']) ? meal.checked is bool : true); // checked is optional but must be boolean
+      }
+    }
+    
+    // Deny access to all other collections by default
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+} 

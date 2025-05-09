@@ -71,6 +71,7 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.rememberCoroutineScope
 import kotlinx.coroutines.launch
+import androidx.activity.compose.BackHandler
 
 // Update Meal data class for Firestore
 data class Meal(
@@ -258,6 +259,9 @@ class MainActivity : ComponentActivity() {
                                             modifier = contentModifier
                                         )
                                     } else {
+                                        BackHandler(enabled = selectedMeal != null) {
+                                            selectedMeal = null
+                                        }
                                         MealDetailScreen(
                                             meal = selectedMeal!!,
                                             modifier = contentModifier
